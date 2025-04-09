@@ -59,7 +59,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="text-sm text-gray-400">WhatsApp</p>
-                      <a href="https://wa.me/8824854410" className="text-white hover:text-teal-400">
+                      <a href="https://wa.me/+918824854410" className="text-white hover:text-teal-400">
                         +91 8824854410
                       </a>
                     </div>
