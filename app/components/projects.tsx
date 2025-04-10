@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { ExternalLink, Github } from "lucide-react";
+import Link from "next/link";
 
 const projects = [
   {
@@ -102,6 +103,7 @@ export default function Projects() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {visibleProjects.map((project, index) => (
+            <a href={project.url} target="_blank" rel="noopener noreferrer">
             <motion.div
               key={project.id}
               className="bg-zinc-900 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border border-zinc-800"
@@ -148,6 +150,7 @@ export default function Projects() {
                 </button>
               </div>
             </motion.div>
+            </a>
           ))}
         </div>
 
