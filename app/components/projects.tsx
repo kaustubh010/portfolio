@@ -24,7 +24,7 @@ const projects = [
       "A complete e-commerce solution for TellMeIndia to sell health products, including a fully-featured admin dashboard for product and order management.",
     image: "/tellshop.png?height=400&width=600",
     tags: ["Next.js", "Tailwind CSS", "Prisma", "PostgreSQL"],
-    url: "https://tellmeindia-shop.vercel.app/",
+    url: "https://tellmeindia.com/",
   },
   {
     id: 3,
