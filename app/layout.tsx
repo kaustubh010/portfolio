@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <link rel="icon" href="ribhu.png" type="image/png" />
+        <link rel="icon" href="kaus.png" type="image/png" />
       </head>
       <body className={`${inter.className} bg-zinc-900 text-white`}>
         <Analytics />

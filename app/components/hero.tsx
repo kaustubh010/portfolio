@@ -198,7 +198,7 @@ export default function ArtisticHero() {
         {/* Call to Actions */}
         <div className="hero-buttons flex flex-wrap justify-center gap-4 mt-6">
           <Link
-            href={"/signup"}
+            href={"#projects"}
             className={cn(
               "get-started-btn rounded-full bg-sky-500 hover:bg-sky-400 text-white md:px-8 px-6 py-3.5 text-base font-semibold shadow-lg shadow-sky-500/30",
               supreme.className
@@ -207,7 +207,7 @@ export default function ArtisticHero() {
             View My Work
           </Link>
           <Link
-            href={"/about"}
+            href={"#contact"}
             className={cn(
               "learn-more-btn rounded-full border-2 font-semibold border-slate-600 text-slate-200 md:px-8 px-6 py-3.5 text-base",
               supreme.className
