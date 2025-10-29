@@ -7,21 +7,21 @@ import localFont from "next/font/local";
 import { cn } from "@/lib/utils";
 
 const tanker = localFont({
-  src: "../../fonts/tanker.ttf",
+  src: "../fonts/tanker.ttf",
   weight: "400",
   style: "normal",
   display: "swap",
 });
 
 const bespoke = localFont({
-  src: "../../fonts/bespoke.ttf",
+  src: "../fonts/bespoke.ttf",
   weight: "400",
   style: "normal",
   display: "swap",
 });
 
 const supreme = localFont({
-  src: "../../fonts/supreme.ttf",
+  src: "../fonts/supreme.ttf",
   weight: "400",
   style: "normal",
   display: "swap",
@@ -30,66 +30,79 @@ const supreme = localFont({
 const projects = [
   {
     id: 1,
-    title: "Social Media App",
+    title: "Kala Hive",
     description:
-      "A mobile-first social platform with posts, likes, comments, and real-time chat.",
-    image: "/social.jpg?height=400&width=600",
-    tags: ["React Native", "Supabase", "Realtime", "Expo"],
-    url: "https://play.google.com/store/apps/details?id=com.kaustubh010.tellmeindia&pcampaignid=web_share",
+      "An art-centric social platform enabling artists to showcase, sell, and engage with a global creative community. Features include user roles, artwork management, and secure authentication.",
+    image: "/kalahive.png?height=400&width=600",
+    tags: [
+      "Next.js",
+      "React",
+      "Lucia Auth",
+      "Drizzle ORM",
+      "Postgres",
+      "Cloudinary",
+      "Tailwind CSS",
+    ],
+    url: "https://kalahive.vercel.app",
   },
   {
     id: 2,
-    title: "TellMeIndia E-Commerce",
+    title: "Chatter",
     description:
-      "A full e-commerce solution with storefront, checkout, and admin dashboard.",
-    image: "/tellshop.png?height=400&width=600",
-    tags: ["Next.js", "Tailwind CSS", "Prisma", "PostgreSQL"],
-    url: "https://tellmeindia.com/",
+      "A full-stack real-time chat application supporting instant messaging, authentication, and live user presence with Socket.IO and React Native (Expo).",
+    image: "/chatterimg.jpeg?height=400&width=600",
+    tags: [
+      "React Native",
+      "Expo",
+      "Express.js",
+      "Socket.IO",
+      "MongoDB",
+      "Node.js",
+    ],
+    url: "https://github.com/kaustubh010/Chatter",
   },
   {
     id: 3,
-    title: "Artistic Platform",
+    title: "Vedsatwa Traders",
     description:
-      "An online hub for artists to showcase, sell, and connect with buyers.",
-    image: "/art.png?height=400&width=600",
-    tags: ["Next.js", "Tailwind CSS", "Prisma", "NextAuth"],
-    url: "https://kala-hive.vercel.app/",
-  },
-  {
-    id: 7,
-    title: "Flagship Portfolio",
-    description:
-      "A sleek portfolio solution for Flagship to present their projects.",
-    image: "/flagship.png?height=400&width=600",
-    tags: ["Next.js", "Tailwind CSS", "Shadcn UI", "Framer Motion"],
-    url: "https://flagship.tellmeindia.com/",
+      "A modern e-commerce platform rooted in Ayurveda, featuring a custom admin dashboard, Razorpay payment integration, and complete order management system.",
+    image: "/traders.png?height=400&width=600",
+    tags: [
+      "Next.js",
+      "Prisma ORM",
+      "PostgreSQL",
+      "Lucia Auth",
+      "Razorpay API",
+      "Tailwind CSS",
+    ],
+    url: "https://www.traders.vedsatwa.com",
   },
   {
     id: 4,
-    title: "TellMeIndia Social",
+    title: "Boom Camp & Resorts",
     description:
-      "A marketing site highlighting TellMeIndia’s social app features.",
-    image: "/socialTell.png?height=400&width=600",
-    tags: ["Next.js", "Tailwind CSS", "Shadcn UI"],
-    url: "https://social.tellmeindia.com/",
-  },
-  {
-    id: 6,
-    title: "TrendLines News App",
-    description:
-      "A responsive news app delivering top headlines and trending stories.",
-    image: "/news.png?height=400&width=600",
-    tags: ["React", "Tailwind CSS", "News API"],
-    url: "https://trendlines.vercel.app/",
+      "A visually immersive website for a luxury resort, designed for high performance and elegant animations using Framer Motion.",
+    image: "/boomcamp.png?height=400&width=600",
+    tags: ["Next.js", "Tailwind CSS", "Framer Motion"],
+    url: "https://boom-resort.vercel.app",
   },
   {
     id: 5,
-    title: "Clox E-Commerce",
+    title: "TrendLines News App",
     description:
-      "An e-commerce platform with clean UI, secure payments, and admin tools.",
-    image: "/clox.jpg?height=400&width=600",
-    tags: ["Next.js", "Tailwind CSS", "MongoDB", "Admin Panel"],
-    url: "https://clox.vercel.app/",
+      "A responsive news aggregation app delivering real-time headlines and category-based stories using the News API.",
+    image: "/trendlines.png?height=400&width=600",
+    tags: ["Next.js", "Tailwind CSS", "News API", "React Hooks"],
+    url: "https://trendlines.vercel.app",
+  },
+  {
+    id: 6,
+    title: "Personal Portfolio Website",
+    description:
+      "My personal portfolio showcasing projects, skills, and experience. Designed for clarity, performance, and subtle motion aesthetics.",
+    image: "/portfolio.png?height=400&width=600",
+    tags: ["Next.js", "Tailwind CSS", "Framer Motion", "Vercel"],
+    url: "https://kaaustubh.vercel.app",
   },
 ];
 
@@ -230,7 +243,7 @@ export default function Projects() {
         </div>
 
         {/* See More */}
-        {!showAll && (
+        {!showAll && projects.length > 6 && (
           <div className="mt-16 text-center">
             <motion.button
               className={cn(

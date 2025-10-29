@@ -7,21 +7,21 @@ import localFont from "next/font/local";
 import { cn } from "@/lib/utils";
 
 const tanker = localFont({
-  src: "../../fonts/tanker.ttf",
+  src: "../fonts/tanker.ttf",
   weight: "400",
   style: "normal",
   display: "swap",
 });
 
 const bespoke = localFont({
-  src: "../../fonts/bespoke.ttf",
+  src: "../fonts/bespoke.ttf",
   weight: "400",
   style: "normal",
   display: "swap",
 });
 
 const supreme = localFont({
-  src: "../../fonts/supreme.ttf",
+  src: "../fonts/supreme.ttf",
   weight: "400",
   style: "normal",
   display: "swap",
