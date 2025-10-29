@@ -33,7 +33,7 @@ const projects = [
     title: "Kala Hive",
     description:
       "An art-centric social platform enabling artists to showcase, sell, and engage with a global creative community. Features include user roles, artwork management, and secure authentication.",
-    image: "/kalahive.png?height=400&width=600",
+    image: "/kalaHive.png?height=400&width=600",
     tags: [
       "Next.js",
       "React",
