@@ -75,7 +75,7 @@ const projects = [
       "Razorpay API",
       "Tailwind CSS",
     ],
-    url: "https://www.traders.vedsatwa.com",
+    url: "https://vedsatwa-traders.vercel.app",
   },
   {
     id: 4,
