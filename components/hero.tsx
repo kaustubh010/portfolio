@@ -4,6 +4,7 @@ import React from "react";
 import localFont from "next/font/local";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 import Silk from "./silk";
 
 const tanker = localFont({
@@ -54,6 +55,17 @@ export default function ArtisticHero() {
           }
         }
 
+        @keyframes fadeInLeft {
+          0% {
+            opacity: 0;
+            transform: translateX(-40px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
         @keyframes shimmer {
           0% {
             left: -100%;
@@ -74,6 +86,18 @@ export default function ArtisticHero() {
           }
         }
 
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+
+        .hero-image {
+          animation: fadeInLeft 0.8s ease-in-out 0.2s both;
+        }
         .hero-badge {
           animation: fadeInUp 0.6s ease-in-out 0.1s both;
         }
@@ -88,6 +112,14 @@ export default function ArtisticHero() {
         }
         .hero-buttons {
           animation: fadeInUp 0.8s ease-in-out 0.9s both;
+        }
+
+        /* Profile Image Hover */
+        .profile-image-wrapper {
+          transition: transform 0.3s ease;
+        }
+        .profile-image-wrapper:hover {
+          animation: float 3s ease-in-out infinite;
         }
 
         /* Get Started Button Hover */
@@ -152,69 +184,95 @@ export default function ArtisticHero() {
         }
       `}</style>
 
-      <div className="hero-container relative z-10 flex flex-col items-center justify-center gap-8 max-w-5xl">
-        {/* Greeting Badge */}
-        <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 backdrop-blur-sm border border-slate-700/50">
-          <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
-          <span className={cn("text-sm text-slate-300", supreme.className)}>
-            Available for Freelance Work
-          </span>
-        </div>
-
-        {/* Main Heading */}
-        <div className="text-center space-y-4">
-          <h1
-            className={cn(
-              "hero-title text-6xl md:text-8xl tracking-tight leading-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent",
-              tanker.className
-            )}
-          >
-            Kaustubh Bhardwaj
-          </h1>
-          <div
-            className={cn(
-              "flex flex-wrap justify-center items-center gap-2 text-2xl md:text-4xl text-sky-400",
-              bespoke.className
-            )}
-          >
-            <span>Full-Stack Developer</span>
-            <span className="text-slate-500">•</span>
-            <span>UI/UX Builder</span>
+      <div className="hero-container relative z-10 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 mx-auto">
+        {/* Profile Image Section - Always shows first on mobile, left on desktop */}
+        <div className="hero-image flex-shrink-0 order-1 lg:order-1">
+          <div className="profile-image-wrapper relative">
+            {/* Decorative ring */}
+            <div className="absolute -inset-4 bg-gradient-to-r from-sky-500 to-cyan-500 rounded-full blur-lg opacity-30"></div>
+            
+            {/* Image container with border */}
+            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-sky-500/50 shadow-2xl shadow-sky-500/20">
+              <Image
+                src="/profile.png"
+                alt="Kaustubh Bhardwaj"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+            
+            {/* Decorative dots */}
+            <div className="absolute -top-2 -right-2 w-4 h-4 bg-sky-400 rounded-full animate-pulse"></div>
+            <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-cyan-400 rounded-full animate-pulse delay-150"></div>
           </div>
         </div>
 
-        {/* Description */}
-        <p
-          className={cn(
-            "hero-subtitle max-w-2xl text-base md:text-lg text-slate-400 leading-relaxed px-4",
-            supreme.className
-          )}
-        >
-          Building scalable web apps with React, Next.js, and modern backends.
-          Experienced in authentication, databases, and realtime systems.
-          Passionate about clean design and crafting smooth user experiences.
-        </p>
+        {/* Content Section - Shows second on mobile, right on desktop */}
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 lg:gap-8 flex-1 order-2 lg:order-2">
+          {/* Greeting Badge */}
+          <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 backdrop-blur-sm border border-slate-700/50">
+            <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
+            <span className={cn("text-sm text-slate-300", supreme.className)}>
+              Available for Freelance Work
+            </span>
+          </div>
 
-        {/* Call to Actions */}
-        <div className="hero-buttons flex flex-wrap justify-center gap-4 mt-6">
-          <Link
-            href={"#projects"}
+          {/* Main Heading */}
+          <div className="space-y-3 lg:space-y-4">
+            <h1
+              className={cn(
+                "hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent",
+                tanker.className
+              )}
+            >
+              Kaustubh Bhardwaj
+            </h1>
+            <div
+              className={cn(
+                "flex flex-wrap justify-center lg:justify-start items-center gap-2 text-lg sm:text-xl md:text-2xl lg:text-3xl text-sky-400",
+                bespoke.className
+              )}
+            >
+              <span>Full-Stack Developer</span>
+              <span className="text-slate-500">•</span>
+              <span>UI/UX Builder</span>
+            </div>
+          </div>
+
+          {/* Description */}
+          <p
             className={cn(
-              "get-started-btn rounded-full bg-sky-500 hover:bg-sky-400 text-white md:px-8 px-6 py-3.5 text-base font-semibold shadow-lg shadow-sky-500/30",
+              "hero-subtitle max-w-2xl text-sm sm:text-base md:text-lg text-slate-400 leading-relaxed px-4 lg:px-0",
               supreme.className
             )}
           >
-            View My Work
-          </Link>
-          <Link
-            href={"#contact"}
-            className={cn(
-              "learn-more-btn rounded-full border-2 font-semibold border-slate-600 text-slate-200 md:px-8 px-6 py-3.5 text-base",
-              supreme.className
-            )}
-          >
-            Get In Touch
-          </Link>
+            Building scalable web apps with React, Next.js, and modern backends.
+            Experienced in authentication, databases, and realtime systems.
+            Passionate about clean design and crafting smooth user experiences.
+          </p>
+
+          {/* Call to Actions */}
+          <div className="hero-buttons flex flex-wrap justify-center lg:justify-start gap-4 mt-4 lg:mt-6">
+            <Link
+              href={"#projects"}
+              className={cn(
+                "get-started-btn rounded-full bg-sky-500 hover:bg-sky-400 text-white px-6 md:px-8 py-3 md:py-3.5 text-sm md:text-base font-semibold shadow-lg shadow-sky-500/30",
+                supreme.className
+              )}
+            >
+              View My Work
+            </Link>
+            <Link
+              href={"#contact"}
+              className={cn(
+                "learn-more-btn rounded-full border-2 font-semibold border-slate-600 text-slate-200 px-6 md:px-8 py-3 md:py-3.5 text-sm md:text-base",
+                supreme.className
+              )}
+            >
+              Get In Touch
+            </Link>
+          </div>
         </div>
       </div>
     </div>

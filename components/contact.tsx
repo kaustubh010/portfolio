@@ -18,8 +18,8 @@ export default function Contact() {
     {
       icon: Phone,
       label: "WhatsApp",
-      value: "+91 8824854410",
-      href: "https://wa.me/+918824854410",
+      value: "+91 8619402976",
+      href: "https://wa.me/+918619402976",
       gradient: "from-emerald-500 to-green-600",
       shadow: "shadow-emerald-500/20",
       hoverColor: "hover:text-emerald-400"
