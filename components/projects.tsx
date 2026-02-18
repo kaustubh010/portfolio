@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import localFont from "next/font/local";
 import { cn } from "@/lib/utils";
+import { projects } from "@/data/projects";
 
 const tanker = localFont({
   src: "../fonts/tanker.ttf",
@@ -26,94 +27,6 @@ const supreme = localFont({
   style: "normal",
   display: "swap",
 });
-
-const projects = [
-  {
-    id: 1,
-    title: "Land Record Digitization Assistant",
-    description:
-      "A web-based land record reconciliation system that links GeoJSON parcel maps with textual ownership records to detect inconsistencies, allow controlled edits, and maintain a complete audit trail.",
-    image: "/land.png?height=400&width=600",
-    tags: [
-      "Next.js",
-      "leaflet.js",
-      "Lucia Auth",
-      "GeoJSON",
-      "React",
-      "Postgres",
-      "Tailwind CSS",
-    ],
-    url: "https://land-map-assistant.vercel.app",
-    github: "https://github.com/kaustubh010/land-map-assistant",
-  },
-  {
-    id: 2,
-    title: "Kala Hive",
-    description:
-      "An art-centric social platform enabling artists to showcase, sell, and engage with a global creative community. Features include user roles, artwork management, and secure authentication.",
-    image: "/kalaHive.png?height=400&width=600",
-    tags: [
-      "Next.js",
-      "React",
-      "Lucia Auth",
-      "Drizzle ORM",
-      "Postgres",
-      "Cloudinary",
-      "Tailwind CSS",
-    ],
-    url: "https://kalahive.vercel.app",
-  },
-  {
-    id: 3,
-    title: "Chatter",
-    description:
-      "A full-stack real-time chat application supporting instant messaging, authentication, and live user presence with Socket.IO and React Native (Expo).",
-    image: "/chatterimg.jpeg?height=400&width=600",
-    tags: [
-      "React Native",
-      "Expo",
-      "Express.js",
-      "Socket.IO",
-      "MongoDB",
-      "Node.js",
-    ],
-    github: "https://github.com/kaustubh010/Chatter",
-  },
-  {
-    id: 4,
-    title: "Vedsatwa Traders",
-    description:
-      "A modern e-commerce platform rooted in Ayurveda, featuring a custom admin dashboard, Razorpay payment integration, and complete order management system.",
-    image: "/traders.png?height=400&width=600",
-    tags: [
-      "Next.js",
-      "Prisma ORM",
-      "PostgreSQL",
-      "Lucia Auth",
-      "Razorpay API",
-      "Tailwind CSS",
-    ],
-    url: "https://vedsatwa-traders.vercel.app",
-  },
-  {
-    id: 5,
-    title: "Boom Camp & Resorts",
-    description:
-      "A visually immersive website for a luxury resort, designed for high performance and elegant animations using Framer Motion.",
-    image: "/boomcamp.png?height=400&width=600",
-    tags: ["Next.js", "Tailwind CSS", "Framer Motion"],
-    url: "https://boom-resort.vercel.app",
-  },
-  {
-    id: 6,
-    title: "TrendLines News App",
-    description:
-      "A responsive news aggregation app delivering real-time headlines and category-based stories using the News API.",
-    image: "/trendlines.png?height=400&width=600",
-    tags: ["Next.js", "Tailwind CSS", "News API", "React Hooks"],
-    url: "https://trendlines.vercel.app",
-  },
-];
 
 export default function Projects() {
   const [showAll, setShowAll] = useState(false);
@@ -165,106 +78,102 @@ export default function Projects() {
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-  {visibleProjects.map((project, index) => (
-    <motion.div
-      key={project.id}
-      className="group"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true }}
-    >
-      <div className="bg-slate-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-800 hover:border-sky-500/50 hover:shadow-lg hover:shadow-sky-500/10 transition-all duration-300 h-full flex flex-col">
+          {visibleProjects.map((project, index) => (
+            <motion.div
+              key={project.title}
+              className="group"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <div className="bg-slate-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-800 hover:border-sky-500/50 hover:shadow-lg hover:shadow-sky-500/10 transition-all duration-300 h-full flex flex-col">
+                {/* Image */}
+                <div className="relative h-56 overflow-hidden bg-slate-800">
+                  <img
+                    src={project.image || "/placeholder.svg"}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-70" />
+                </div>
 
-        {/* Image */}
-        <div className="relative h-56 overflow-hidden bg-slate-800">
-          <img
-            src={project.image || "/placeholder.svg"}
-            alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-70" />
+                {/* Content */}
+                <div className="p-6 flex flex-col flex-grow">
+                  {/* Title */}
+                  <h3
+                    className={cn(
+                      "text-xl font-semibold text-white mb-3 group-hover:text-sky-400 transition-colors",
+                      bespoke.className,
+                    )}
+                  >
+                    {project.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p
+                    className={cn(
+                      "text-slate-400 text-sm mb-5 leading-relaxed flex-grow",
+                      supreme.className,
+                    )}
+                  >
+                    {project.description}
+                  </p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className={cn(
+                          "bg-slate-800/60 border border-slate-700 text-slate-300 text-xs px-3 py-1.5 rounded-full",
+                          supreme.className,
+                        )}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Actions */}
+                  <div className="mt-auto flex flex-col sm:flex-row gap-3">
+                    {/* Primary — Prototype / Live */}
+                    {project.url && (
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={cn(
+                          "flex-1 flex items-center justify-center gap-2 rounded-lg bg-sky-500 hover:bg-sky-400 text-white py-2.5 text-sm font-semibold transition hover:-translate-y-0.5",
+                          supreme.className,
+                        )}
+                      >
+                        <ExternalLink size={16} />
+                        View Prototype
+                      </a>
+                    )}
+
+                    {/* Secondary — GitHub (Optional) */}
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={cn(
+                          "flex-1 flex items-center justify-center gap-2 rounded-lg border border-slate-700 text-slate-300 hover:border-sky-500/50 hover:text-sky-400 py-2.5 text-sm font-semibold transition",
+                          supreme.className,
+                        )}
+                      >
+                        <Github size={16} />
+                        GitHub
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
-
-        {/* Content */}
-        <div className="p-6 flex flex-col flex-grow">
-
-          {/* Title */}
-          <h3
-            className={cn(
-              "text-xl font-semibold text-white mb-3 group-hover:text-sky-400 transition-colors",
-              bespoke.className
-            )}
-          >
-            {project.title}
-          </h3>
-
-          {/* Description */}
-          <p
-            className={cn(
-              "text-slate-400 text-sm mb-5 leading-relaxed flex-grow",
-              supreme.className
-            )}
-          >
-            {project.description}
-          </p>
-
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className={cn(
-                  "bg-slate-800/60 border border-slate-700 text-slate-300 text-xs px-3 py-1.5 rounded-full",
-                  supreme.className
-                )}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          {/* Actions */}
-          <div className="mt-auto flex flex-col sm:flex-row gap-3">
-
-            {/* Primary — Prototype / Live */}
-            {project.url && (
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  "flex-1 flex items-center justify-center gap-2 rounded-lg bg-sky-500 hover:bg-sky-400 text-white py-2.5 text-sm font-semibold transition hover:-translate-y-0.5",
-                  supreme.className
-                )}
-              >
-                <ExternalLink size={16} />
-                View Prototype
-              </a>
-            )}
-
-            {/* Secondary — GitHub (Optional) */}
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  "flex-1 flex items-center justify-center gap-2 rounded-lg border border-slate-700 text-slate-300 hover:border-sky-500/50 hover:text-sky-400 py-2.5 text-sm font-semibold transition",
-                  supreme.className
-                )}
-              >
-                <Github size={16} />
-                GitHub
-              </a>
-            )}
-          </div>
-
-        </div>
-      </div>
-    </motion.div>
-  ))}
-</div>
 
         {/* See More */}
         {!showAll && projects.length > 6 && (

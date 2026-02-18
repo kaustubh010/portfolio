@@ -1,18 +1,12 @@
 "use client";
 
-import { Github, Instagram, Linkedin, Twitter } from "lucide-react";
+import { Github, Instagram, Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    {
-      icon: <Twitter className="h-5 w-5" />,
-      url: "https://x.com/Kaustubh_Bhara",
-      name: "Twitter",
-      gradient: "from-sky-400 to-blue-500",
-    },
     {
       icon: <Linkedin className="h-5 w-5" />,
       url: "https://www.linkedin.com/in/kaustubhbharadwaj",
