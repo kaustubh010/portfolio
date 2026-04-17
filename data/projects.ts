@@ -1,5 +1,41 @@
 export const projects = [
     {
+    id: 18,
+    title: "Campus Fund",
+    description:
+      "A blockchain-powered crowdfunding platform designed for campus communities. It uses Algorand smart contract escrow to ensure that funds are only released when campaign goals are met and verified through real invoices.",
+    image: "/campus.png?height=400&width=600",
+    tags: [
+      "Next.js",
+      "Lucia Auth",
+      "Cloudinary",
+      "Algorand",
+      "Perawallet",
+      "Prisma ORM",
+      "Postgres",
+      "Tailwind CSS",
+    ],
+    url: "https://campus-fund-eta.vercel.app",
+    github: "https://github.com/kaustubh010/Campus-Fund",
+  },
+    {
+    id: 55,
+    title: "💊 Medical Medicine Tracker",
+    description:
+      "MediNutri — A health-focused web platform that combines nutrition and medical insights to help users make better lifestyle decisions. It provides personalized diet guidance, tracks key health indicators.",
+    image: "/medi.png?height=400&width=600",
+    tags: [
+      "Next.js",
+      "Lucia Auth",
+      "Cloudinary",
+      "React",
+      "Postgres",
+      "Tailwind CSS",
+    ],
+    url: "https://medinutri-tracker.vercel.app",
+    github: "https://github.com/kaustubh010/medinutri-tracker",
+  },
+    {
     id: 1,
     title: "Land Record Digitization Assistant",
     description:

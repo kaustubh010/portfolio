@@ -5,7 +5,7 @@ import localFont from "next/font/local";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
-import Silk from "./silk";
+import LineWaves from "./lineWaves";
 
 const tanker = localFont({
   src: "../fonts/tanker.ttf",
@@ -30,169 +30,157 @@ const supreme = localFont({
 
 export default function ArtisticHero() {
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center px-6 py-20 text-center overflow-hidden bg-slate-950">
-      {/* Full-page animated background with gradient overlay */}
+    <div className="relative min-h-screen flex flex-col items-center justify-center px-8 py-20 overflow-hidden">
+      {/* Background waves */}
       <div className="absolute inset-0 z-0">
-        <Silk
-          speed={3}
-          scale={1.2}
-          color="#0ea5e9"
-          noiseIntensity={0.8}
-          rotation={15}
+        <LineWaves
+          speed={0.3}
+          innerLineCount={32}
+          outerLineCount={36}
+          warpIntensity={1}
+          rotation={-45}
+          edgeFadeWidth={0}
+          colorCycleSpeed={1}
+          brightness={0.2}
+          color1="#F97316"
+          color2="#EF4444"
+          color3="#F43F5E"
+          enableMouseInteraction
+          mouseInfluence={2}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-900/60 to-slate-900/80" />
       </div>
 
+      {/* Overlays */}
+      <div className="absolute inset-0 z-0 bg-black/65" />
+      <div
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(249,115,22,0.06) 0%, transparent 70%)",
+        }}
+      />
+      {/* Subtle grid */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none opacity-30"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(249,115,22,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(249,115,22,0.04) 1px, transparent 1px)",
+          backgroundSize: "50px 50px",
+        }}
+      />
+
       <style jsx global>{`
-        @keyframes fadeInUp {
-          0% {
-            opacity: 0;
-            transform: translateY(40px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(28px); }
+          to   { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes fadeInLeft {
-          0% {
-            opacity: 0;
-            transform: translateX(-40px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateX(0);
-          }
+        @keyframes fadeLeft {
+          from { opacity: 0; transform: translateX(-28px); }
+          to   { opacity: 1; transform: translateX(0); }
         }
-
         @keyframes shimmer {
-          0% {
-            left: -100%;
-          }
-          100% {
-            left: 100%;
-          }
+          from { left: -100%; }
+          to   { left: 100%; }
+        }
+        @keyframes pulseRing {
+          0%   { transform: scale(1);    opacity: 0.45; }
+          100% { transform: scale(1.38); opacity: 0; }
+        }
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50%       { opacity: 0; }
         }
 
-        @keyframes slideIn {
-          0% {
-            opacity: 0;
-            transform: translateX(-20px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateX(0);
-          }
+        .h-anim-img     { animation: fadeLeft 0.8s ease both 0.15s; }
+        .h-anim-badge   { animation: fadeUp   0.6s ease both 0.1s; }
+        .h-anim-title   { animation: fadeUp   0.8s ease both 0.25s; }
+        .h-anim-role    { animation: fadeUp   0.7s ease both 0.4s; }
+        .h-anim-desc    { animation: fadeUp   0.7s ease both 0.55s; }
+        .h-anim-btns    { animation: fadeUp   0.7s ease both 0.7s; }
+
+        .pulse-ring {
+          position: absolute; inset: -10px; border-radius: 9999px;
+          border: 2px solid rgba(249,115,22,0.32);
+          animation: pulseRing 2.2s ease-out infinite;
+        }
+        .pulse-ring-2 {
+          position: absolute; inset: -20px; border-radius: 9999px;
+          border: 1px solid rgba(244,63,94,0.2);
+          animation: pulseRing 2.2s ease-out 0.75s infinite;
         }
 
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
+        .cyber-btn {
+          position: relative; overflow: hidden;
+          transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+          clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
         }
+        .cyber-btn::before {
+          content: ""; position: absolute; top: 0; left: -100%;
+          width: 100%; height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+        }
+        .cyber-btn:hover::before { animation: shimmer 0.55s ease; }
+        .cyber-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(249,115,22,0.35); }
 
-        .hero-image {
-          animation: fadeInLeft 0.8s ease-in-out 0.2s both;
+        .ghost-btn {
+          position: relative; overflow: hidden;
+          transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+          clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
         }
-        .hero-badge {
-          animation: fadeInUp 0.6s ease-in-out 0.1s both;
+        .ghost-btn::before {
+          content: ""; position: absolute; top: 0; left: 0;
+          width: 0; height: 100%;
+          background: rgba(249,115,22,0.08);
+          transition: width 0.35s ease; z-index: -1;
         }
-        .hero-title {
-          animation: fadeInUp 0.8s ease-in-out 0.3s both;
-        }
-        .hero-subtitle {
-          animation: fadeInUp 0.8s ease-in-out 0.5s both;
-        }
-        .hero-stats {
-          animation: fadeInUp 0.8s ease-in-out 0.7s both;
-        }
-        .hero-buttons {
-          animation: fadeInUp 0.8s ease-in-out 0.9s both;
-        }
+        .ghost-btn:hover::before { width: 100%; }
+        .ghost-btn:hover { border-color: rgba(249,115,22,0.65); transform: translateY(-2px); }
 
-        /* Profile Image Hover */
-        .profile-image-wrapper {
-          transition: transform 0.3s ease;
-        }
-        .profile-image-wrapper:hover {
-          animation: float 3s ease-in-out infinite;
-        }
-
-        /* Get Started Button Hover */
-        .get-started-btn {
-          position: relative;
-          overflow: hidden;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .get-started-btn::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.3),
-            transparent
-          );
-        }
-        .get-started-btn:hover::before {
-          animation: shimmer 0.6s ease;
-        }
-        .get-started-btn:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 20px 40px rgba(14, 165, 233, 0.4);
-        }
-        .get-started-btn:active {
-          transform: translateY(0);
-        }
-
-        /* Learn More Button Hover */
-        .learn-more-btn {
-          position: relative;
-          overflow: hidden;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          background: transparent;
-        }
-        .learn-more-btn::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 0;
-          height: 100%;
-          background: rgba(148, 163, 184, 0.1);
-          transition: width 0.4s ease;
-          z-index: -1;
-        }
-        .learn-more-btn:hover::before {
-          width: 100%;
-        }
-        .learn-more-btn:hover {
-          border-color: rgb(148, 163, 184);
-          transform: translateY(-2px);
-          box-shadow: 0 10px 30px rgba(148, 163, 184, 0.2);
-        }
-        .learn-more-btn:active {
-          transform: translateY(0);
-        }
+        .cursor-blink { animation: blink 1.1s step-end infinite; }
       `}</style>
 
-      <div className="hero-container relative z-10 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 mx-auto">
-        {/* Profile Image Section - Always shows first on mobile, left on desktop */}
-        <div className="hero-image flex-shrink-0 order-1 lg:order-1">
-          <div className="profile-image-wrapper relative">
-            {/* Decorative ring */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-sky-500 to-cyan-500 rounded-full blur-lg opacity-30"></div>
-            
-            {/* Image container with border */}
-            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-sky-500/50 shadow-2xl shadow-sky-500/20">
+      {/* ── Main layout ── */}
+      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 w-full max-w-5xl mx-auto">
+
+        {/* ── Profile image ── */}
+        <div className="h-anim-img flex-shrink-0">
+          <div className="relative">
+            <div className="pulse-ring" />
+            <div className="pulse-ring-2" />
+
+            {/* Conic border ring */}
+            <div
+              className="absolute rounded-full"
+              style={{
+                inset: "-3px",
+                background: "conic-gradient(from 0deg, #F97316, #EF4444, #F43F5E, #F97316)",
+                padding: "2px",
+                borderRadius: "9999px",
+              }}
+            >
+              <div className="w-full h-full rounded-full bg-black/90" />
+            </div>
+
+            {/* Glow halo */}
+            <div
+              className="absolute rounded-full pointer-events-none"
+              style={{
+                inset: "-20px",
+                background: "radial-gradient(circle, rgba(249,115,22,0.22) 0%, transparent 65%)",
+                filter: "blur(18px)",
+              }}
+            />
+
+            {/* Photo */}
+            <div
+              className="relative rounded-full overflow-hidden z-10"
+              style={{
+                width: "clamp(180px, 22vw, 296px)",
+                height: "clamp(180px, 22vw, 296px)",
+                border: "2px solid rgba(249,115,22,0.5)",
+                boxShadow: "0 0 32px rgba(249,115,22,0.22)",
+              }}
+            >
               <Image
                 src="/profile.png"
                 alt="Kaustubh Bhardwaj"
@@ -201,80 +189,112 @@ export default function ArtisticHero() {
                 priority
               />
             </div>
-            
-            {/* Decorative dots */}
-            <div className="absolute -top-2 -right-2 w-4 h-4 bg-sky-400 rounded-full animate-pulse"></div>
-            <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-cyan-400 rounded-full animate-pulse delay-150"></div>
+
+            {/* Corner accents */}
+            <div className="absolute -top-1 -right-1 w-5 h-5 z-20" style={{ borderTop: "2px solid #F97316", borderRight: "2px solid #F97316" }} />
+            <div className="absolute -bottom-1 -left-1 w-5 h-5 z-20" style={{ borderBottom: "2px solid #F43F5E", borderLeft: "2px solid #F43F5E" }} />
+
+            {/* Status dot */}
+            <span
+              className="absolute top-3 right-3 z-30 block w-3 h-3 rounded-full bg-orange-400 animate-pulse"
+              style={{ boxShadow: "0 0 8px #F97316" }}
+            />
           </div>
         </div>
 
-        {/* Content Section - Shows second on mobile, right on desktop */}
-        <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 lg:gap-8 flex-1 order-2 lg:order-2">
-          {/* Greeting Badge */}
-          <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 backdrop-blur-sm border border-slate-700/50">
-            <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
-            <span className={cn("text-sm text-slate-300", supreme.className)}>
-              Available for Freelance Work
+        {/* ── Content ── */}
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 flex-1">
+
+          {/* Available badge */}
+          <div
+            className="h-anim-badge inline-flex items-center gap-2.5 px-5 py-2"
+            style={{
+              background: "rgba(249,115,22,0.08)",
+              border: "1px solid rgba(249,115,22,0.25)",
+              clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
+            }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
+            <span className={cn("text-xs tracking-widest uppercase text-orange-400", supreme.className)}>
+              Available for freelance
             </span>
+            <span className="cursor-blink text-orange-400 text-xs font-mono leading-none">_</span>
           </div>
 
-          {/* Main Heading */}
-          <div className="space-y-3 lg:space-y-4">
+          {/* Name — single line */}
+          <div className="h-anim-title w-full">
             <h1
-              className={cn(
-                "hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent",
-                tanker.className
-              )}
+              className={cn("leading-none tracking-tight whitespace-nowrap", tanker.className)}
+              style={{
+                fontSize: "clamp(2.6rem, 6.5vw, 6rem)",
+                background: "linear-gradient(120deg, #ffffff 0%, #ffe8d6 35%, #F97316 65%, #F43F5E 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
             >
               Kaustubh Bhardwaj
             </h1>
-            <div
-              className={cn(
-                "flex flex-wrap justify-center lg:justify-start items-center gap-2 text-lg sm:text-xl md:text-2xl lg:text-3xl text-sky-400",
-                bespoke.className
-              )}
-            >
-              <span>Full-Stack Developer</span>
-              <span className="text-slate-500">•</span>
-              <span>UI/UX Builder</span>
-            </div>
           </div>
 
-          {/* Description */}
+          {/* Role line */}
+          <div
+            className={cn("h-anim-role flex flex-wrap justify-center lg:justify-start items-center gap-3", bespoke.className)}
+            style={{ fontSize: "clamp(1rem, 2vw, 1.35rem)" }}
+          >
+            <span style={{ color: "#F97316" }}>Full-Stack Developer</span>
+            <span className="font-mono text-zinc-600 text-sm">/</span>
+            <span className="text-zinc-300">UI/UX Builder</span>
+          </div>
+
+        
+
+          {/* Bio */}
           <p
-            className={cn(
-              "hero-subtitle max-w-2xl text-sm sm:text-base md:text-lg text-slate-400 leading-relaxed px-4 lg:px-0",
-              supreme.className
-            )}
+            className={cn("h-anim-desc text-zinc-400 leading-[1.8]", supreme.className)}
+            style={{ fontSize: "clamp(0.875rem, 1.2vw, 1rem)", maxWidth: "480px" }}
           >
             Building scalable web apps with React, Next.js, and modern backends.
             Experienced in authentication, databases, and realtime systems.
-            Passionate about clean design and crafting smooth user experiences.
+            Passionate about clean design and smooth user experiences.
           </p>
 
-          {/* Call to Actions */}
-          <div className="hero-buttons flex flex-wrap justify-center lg:justify-start gap-4 mt-4 lg:mt-6">
+          {/* CTA buttons */}
+          <div className="h-anim-btns flex flex-wrap justify-center lg:justify-start gap-4">
             <Link
-              href={"#projects"}
-              className={cn(
-                "get-started-btn rounded-full bg-sky-500 hover:bg-sky-400 text-white px-6 md:px-8 py-3 md:py-3.5 text-sm md:text-base font-semibold shadow-lg shadow-sky-500/30",
-                supreme.className
-              )}
+              href="#projects"
+              className={cn("cyber-btn text-sm font-semibold text-black", supreme.className)}
+              style={{
+                padding: "0.75rem 2rem",
+                background: "linear-gradient(135deg, #F97316, #EF4444)",
+                boxShadow: "0 0 18px rgba(249,115,22,0.35)",
+              }}
             >
               View My Work
             </Link>
             <Link
-              href={"#contact"}
-              className={cn(
-                "learn-more-btn rounded-full border-2 font-semibold border-slate-600 text-slate-200 px-6 md:px-8 py-3 md:py-3.5 text-sm md:text-base",
-                supreme.className
-              )}
+              href="#contact"
+              className={cn("ghost-btn text-sm font-semibold border", supreme.className)}
+              style={{
+                padding: "0.75rem 2rem",
+                borderColor: "rgba(249,115,22,0.35)",
+                color: "#F97316",
+              }}
             >
               Get In Touch
             </Link>
           </div>
         </div>
       </div>
+
+      {/* Bottom accent */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-px z-10"
+        style={{
+          background: "linear-gradient(90deg, transparent, #F97316, #EF4444, #F43F5E, transparent)",
+          opacity: 0.45,
+        }}
+      />
     </div>
   );
 }

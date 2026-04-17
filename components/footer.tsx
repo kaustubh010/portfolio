@@ -2,97 +2,228 @@
 
 import { Github, Instagram, Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
+import localFont from "next/font/local";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+
+const tanker = localFont({ src: "../fonts/tanker.ttf", weight: "400", style: "normal", display: "swap" });
+const supreme = localFont({ src: "../fonts/supreme.ttf", weight: "400", style: "normal", display: "swap" });
+
+const navLinks = [
+  { label: "About",    href: "#about"    },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact",  href: "#contact"  },
+];
+
+const socialLinks = [
+  {
+    icon: <Linkedin size={15} />,
+    url: "https://www.linkedin.com/in/kaustubhbharadwaj",
+    name: "LinkedIn",
+    color: "#F97316",
+    colorRgb: "249,115,22",
+  },
+  {
+    icon: <Github size={15} />,
+    url: "https://github.com/kaustubh010",
+    name: "GitHub",
+    color: "#EF4444",
+    colorRgb: "239,68,68",
+  },
+  {
+    icon: <Instagram size={15} />,
+    url: "https://www.instagram.com/kaustubh._.bharadwaj",
+    name: "Instagram",
+    color: "#F43F5E",
+    colorRgb: "244,63,94",
+  },
+];
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
-  const socialLinks = [
-    {
-      icon: <Linkedin className="h-5 w-5" />,
-      url: "https://www.linkedin.com/in/kaustubhbharadwaj",
-      name: "LinkedIn",
-      gradient: "from-blue-500 to-blue-600",
-    },
-    {
-      icon: <Github className="h-5 w-5" />,
-      url: "https://github.com/kaustubh010",
-      name: "GitHub",
-      gradient: "from-slate-500 to-slate-700",
-    },
-    {
-      icon: <Instagram className="h-5 w-5" />,
-      url: "https://www.instagram.com/kaustubh._.bharadwaj",
-      name: "Instagram",
-      gradient: "from-pink-500 to-purple-600",
-    },
-  ];
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="relative border-t border-slate-800/50 bg-slate-950 py-12">
-      {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent pointer-events-none" />
-      
-      <div className="container relative mx-auto px-4">
-        <div className="flex flex-col items-center justify-between gap-8 sm:flex-row">
-          {/* Copyright Text */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="flex flex-col items-center sm:items-start gap-2"
-          >
-            <p className="text-sm text-slate-400">
-              © {currentYear} <span className="text-white font-semibold">Kaustubh Bhardwaj</span>. All rights reserved.
-            </p>
-            <p className="text-xs text-slate-500">
-              Built with Next.js & Tailwind CSS
-            </p>
-          </motion.div>
+    <footer
+      className="relative overflow-hidden"
+      style={{
+        background: "#060404",
+        borderTop: "1px solid rgba(249,115,22,0.12)",
+      }}
+    >
+      {/* Subtle glow at top */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-20 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse, rgba(249,115,22,0.08) 0%, transparent 70%)",
+          filter: "blur(20px)",
+        }}
+      />
 
-          {/* Social Links */}
+      <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-8">
+
+        {/* Main footer content */}
+        <div className="py-12 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6">
+
+          {/* Brand column */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.5 }}
             viewport={{ once: true }}
+            className="flex flex-col gap-4"
           >
-            <nav className="flex items-center gap-3">
-              {socialLinks.map((link, index) => (
-                <motion.a
-                  key={index}
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2.5 group" aria-label="Home">
+            <div className="flex items-center gap-2.5">
+              <div
+                className="w-1 h-7 rounded-full"
+                style={{ background: "linear-gradient(180deg, #F97316, #F43F5E)" }}
+              />
+              <span
+                className={cn("text-2xl leading-none tracking-tight", tanker.className)}
+                style={{
+                  background: "linear-gradient(120deg, #ffffff 30%, #F97316 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                KB
+              </span>
+              <div
+                className="w-1 h-7 rounded-full"
+                style={{ background: "linear-gradient(180deg, #F97316, #F43F5E)" }}
+              />
+            </div>
+            </Link>
+
+            <p className={cn("text-sm text-zinc-500 leading-relaxed max-w-xs", supreme.className)}>
+              Full-stack developer building performant, beautiful web experiences with React & Next.js.
+            </p>
+
+            {/* Social icons */}
+            <div className="flex items-center gap-2.5 mt-1">
+              {socialLinks.map((link, i) => (
+                <a
+                  key={i}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative flex h-11 w-11 items-center justify-center rounded-xl bg-slate-900/50 backdrop-blur-sm border border-slate-800 text-slate-400 transition-all hover:border-slate-700 hover:-translate-y-1"
                   aria-label={link.name}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center justify-center w-9 h-9 rounded-lg transition-all duration-200"
+                  style={{
+                    background: `rgba(${link.colorRgb},0.06)`,
+                    border: `1px solid rgba(${link.colorRgb},0.18)`,
+                    color: `rgba(${link.colorRgb},0.65)`,
+                  }}
+                  onMouseEnter={e => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.background = `rgba(${link.colorRgb},0.12)`;
+                    el.style.borderColor = `rgba(${link.colorRgb},0.45)`;
+                    el.style.color = link.color;
+                    el.style.transform = "translateY(-2px)";
+                  }}
+                  onMouseLeave={e => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.background = `rgba(${link.colorRgb},0.06)`;
+                    el.style.borderColor = `rgba(${link.colorRgb},0.18)`;
+                    el.style.color = `rgba(${link.colorRgb},0.65)`;
+                    el.style.transform = "translateY(0)";
+                  }}
                 >
-                  {/* Gradient background on hover */}
-                  <div className={`absolute inset-0 rounded-xl bg-gradient-to-br ${link.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                  
-                  {/* Icon */}
-                  <span className="relative z-10 group-hover:text-white transition-colors">
-                    {link.icon}
-                  </span>
-                  
-                  {/* Glow effect */}
-                  <div className={`absolute inset-0 rounded-xl bg-gradient-to-br ${link.gradient} blur-lg opacity-0 group-hover:opacity-30 transition-opacity duration-300`} />
-                </motion.a>
+                  {link.icon}
+                </a>
               ))}
-            </nav>
+            </div>
+          </motion.div>
+
+          {/* Nav links column */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="flex flex-col gap-3"
+          >
+            <p className={cn("text-xs tracking-widest uppercase text-zinc-600 mb-1", supreme.className)}>
+              Navigation
+            </p>
+            {navLinks.map(link => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn("text-sm text-zinc-400 transition-colors duration-200 w-fit", supreme.className)}
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "#F97316")}
+                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "rgba(161,161,170,1)")}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </motion.div>
+
+          {/* Contact column */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="flex flex-col gap-3"
+          >
+            <p className={cn("text-xs tracking-widest uppercase text-zinc-600 mb-1", supreme.className)}>
+              Get In Touch
+            </p>
+            <a
+              href="mailto:kaustubhbhardwaj00@gmail.com"
+              className={cn("text-sm text-zinc-400 transition-colors duration-200 break-all", supreme.className)}
+              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "#F97316")}
+              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "rgba(161,161,170,1)")}
+            >
+              kaustubhbhardwaj00@gmail.com
+            </a>
+            <a
+              href="https://wa.me/+918619402976"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn("text-sm text-zinc-400 transition-colors duration-200", supreme.className)}
+              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "#EF4444")}
+              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "rgba(161,161,170,1)")}
+            >
+              +91 8619402976
+            </a>
+
+            {/* Availability badge */}
+            <div
+              className="mt-2 inline-flex items-center gap-2 px-3.5 py-2 w-fit"
+              style={{
+                background: "rgba(249,115,22,0.06)",
+                border: "1px solid rgba(249,115,22,0.18)",
+                clipPath: "polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)",
+              }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
+              <span className={cn("text-xs text-orange-400/80", supreme.className)}>
+                Open to work
+              </span>
+            </div>
           </motion.div>
         </div>
 
-        {/* Optional decorative line */}
+        {/* Bottom bar */}
         <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
           viewport={{ once: true }}
-          className="mt-8 h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent"
-        />
+          className="py-5 flex flex-col sm:flex-row items-center justify-between gap-3"
+          style={{ borderTop: "1px solid rgba(249,115,22,0.08)" }}
+        >
+          <p className={cn("text-xs text-zinc-600", supreme.className)}>
+            © {year} Kaustubh Bhardwaj. All rights reserved.
+          </p>
+          <p className={cn("text-xs text-zinc-700", supreme.className)}>
+            Built with Next.js · Tailwind CSS · Framer Motion
+          </p>
+        </motion.div>
       </div>
     </footer>
   );
