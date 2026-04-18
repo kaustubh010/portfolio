@@ -1,6 +1,6 @@
 export const projects = [
     {
-    id: 18,
+    id: 1,
     title: "Campus Fund",
     description:
       "A blockchain-powered crowdfunding platform designed for campus communities. It uses Algorand smart contract escrow to ensure that funds are only released when campaign goals are met and verified through real invoices.",
@@ -19,7 +19,7 @@ export const projects = [
     github: "https://github.com/kaustubh010/Campus-Fund",
   },
     {
-    id: 55,
+    id: 2,
     title: "💊 Medical Medicine Tracker",
     description:
       "MediNutri — A health-focused web platform that combines nutrition and medical insights to help users make better lifestyle decisions. It provides personalized diet guidance, tracks key health indicators.",
@@ -36,7 +36,7 @@ export const projects = [
     github: "https://github.com/kaustubh010/medinutri-tracker",
   },
     {
-    id: 1,
+    id: 3,
     title: "Land Record Digitization Assistant",
     description:
       "A web-based land record reconciliation system that links GeoJSON parcel maps with textual ownership records to detect inconsistencies, allow controlled edits, and maintain a complete audit trail.",
@@ -54,7 +54,7 @@ export const projects = [
     github: "https://github.com/kaustubh010/land-map-assistant",
   },
   {
-    id: 2,
+    id: 4,
     title: "Kala Hive",
     description:
       "An art-centric social platform enabling artists to showcase, sell, and engage with a global creative community. Features include user roles, artwork management, and secure authentication.",
@@ -71,7 +71,7 @@ export const projects = [
     url: "https://kalahive.vercel.app",
   },
   {
-    id: 3,
+    id: 5,
     title: "Chatter",
     description:
       "A full-stack real-time chat application supporting instant messaging, authentication, and live user presence with Socket.IO and React Native (Expo).",
@@ -87,7 +87,7 @@ export const projects = [
     github: "https://github.com/kaustubh010/Chatter",
   },
   {
-    id: 4,
+    id: 6,
     title: "Vedsatwa Traders",
     description:
       "A modern e-commerce platform rooted in Ayurveda, featuring a custom admin dashboard, Razorpay payment integration, and complete order management system.",
@@ -103,7 +103,7 @@ export const projects = [
     url: "https://vedsatwa-traders.vercel.app",
   },
   {
-    id: 5,
+    id: 7,
     title: "Boom Camp & Resorts",
     description:
       "A visually immersive website for a luxury resort, designed for high performance and elegant animations using Framer Motion.",
@@ -112,7 +112,7 @@ export const projects = [
     url: "https://boom-resort.vercel.app",
   },
   {
-    id: 6,
+    id: 8,
     title: "TrendLines News App",
     description:
       "A responsive news aggregation app delivering real-time headlines and category-based stories using the News API.",
